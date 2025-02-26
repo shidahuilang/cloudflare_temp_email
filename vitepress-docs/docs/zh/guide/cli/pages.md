@@ -22,7 +22,7 @@ cp .env.example .env.prod
 
 ```bash
 pnpm build --emptyOutDir
-# 根据提示创建 pages
+# 第一次部署会提示创建项目, production 分支请填写 production
 pnpm run deploy
 ```
 
@@ -41,6 +41,7 @@ pnpm run deploy
 ```bash
 cd frontend
 pnpm install
+# 如果你要启用 Cloudflare Zero Trust, 需要使用 pnpm build:pages:nopwa 来禁用缓存
 pnpm build:pages
 cd ../pages
 pnpm run deploy

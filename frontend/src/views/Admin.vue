@@ -30,6 +30,12 @@ const {
 } = useGlobalState()
 const message = useMessage()
 
+const SendMail = defineAsyncComponent(() => {
+  loading.value = true;
+  return import('./admin/SendMail.vue')
+    .finally(() => loading.value = false);
+});
+
 const authFunc = async () => {
   try {
     adminAuth.value = tmpAdminAuth.value;
@@ -45,6 +51,7 @@ const { t } = useI18n({
       accessHeader: 'Admin Password',
       accessTip: 'Please enter the admin password',
       mails: 'Emails',
+      sendMail: 'Send Mail',
       qucickSetup: 'Quick Setup',
       account: 'Account',
       account_create: 'Create Account',
@@ -70,6 +77,7 @@ const { t } = useI18n({
       accessHeader: 'Admin 密码',
       accessTip: '请输入 Admin 密码',
       mails: '邮件',
+      sendMail: '发送邮件',
       qucickSetup: '快速设置',
       account: '账号',
       account_create: '创建账号',
@@ -171,6 +179,9 @@ onMounted(async () => {
           </n-tab-pane>
           <n-tab-pane name="sendBox" :tab="t('sendBox')">
             <SendBox />
+          </n-tab-pane>
+          <n-tab-pane name="sendMail" :tab="t('sendMail')">
+            <SendMail />
           </n-tab-pane>
           <n-tab-pane name="mailWebhook" :tab="t('mailWebhook')">
             <MailWebhook />
